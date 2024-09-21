@@ -1,6 +1,6 @@
 namespace WebApplication1.DTOs;
 
-public class ParamDto
+public record ParamDto
 {
     public string Referrer { get; set; }
     public string ExternalIp { get; set; }

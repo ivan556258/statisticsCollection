@@ -1,6 +1,6 @@
 namespace WebApplication1.DTOs;
 
-public class PosthogHttpDto
+public record PosthogHttpDto
 {
     public string Url {get; set;}
     public string ApiKey {get; set;}

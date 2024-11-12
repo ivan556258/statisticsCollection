@@ -1,8 +1,8 @@
 using dotenv.net;
-using WebApplication1.DTOs;
-using WebApplication1.RepositoryHttp.Interfaces;
+using WebApplication1.Statistics.DTOs;
+using WebApplication1.Statistics.RepositoryHttp.Interfaces;
 
-namespace WebApplication1.Services;
+namespace WebApplication1.Statistics.Services;
 
 public class TrackerHttpService
 {

@@ -1,8 +1,8 @@
-using WebApplication1.Services;
+using WebApplication1.Statistics.Services;
 using Microsoft.AspNetCore.Mvc;
-using WebApplication1.DTOs;
+using WebApplication1.Statistics.DTOs;
 
-namespace WebApplication1.Controllers
+namespace WebApplication1.Statistics.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

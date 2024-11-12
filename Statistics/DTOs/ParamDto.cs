@@ -1,4 +1,4 @@
-namespace WebApplication1.DTOs;
+namespace WebApplication1.Statistics.DTOs;
 
 public record ParamDto
 {

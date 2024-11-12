@@ -1,10 +1,11 @@
-using WebApplication1.RepositoryHttp.Interfaces;
-using WebApplication1.RepositoryHttp.Queries;
-using WebApplication1.Services;
+using Microsoft.Extensions.FileProviders;
+using WebApplication1.Statistics.RepositoryHttp.Interfaces;
+using WebApplication1.Statistics.RepositoryHttp.Queries;
+using WebApplication1.Statistics.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.WebHost.UseUrls("http://0.0.0.0:5000");
+builder.WebHost.UseUrls("http://0.0.0.0:5005");
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddControllersWithViews();
@@ -37,11 +38,23 @@ app.UseRouting();
 
 app.UseAuthorization();
 
+app.UseStaticFiles(new StaticFileOptions
+{
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(Directory.GetCurrentDirectory(), "Storage", "Link")),
+    RequestPath = "/Storage/Link"
+});
+
 app.MapControllerRoute(
     name: "default",
     pattern: "api/v1/Link/{lang?}/{to?}/{from?}",
     defaults: new { controller = "Tracker", action = "SetStat" }
 );
 
+app.MapControllerRoute(
+    name: "CreateAudioLink",
+    pattern: "api/v1/AudioLink",
+    defaults: new { controller = "AudioLink", action = "Create" }
+);
 
 app.Run();

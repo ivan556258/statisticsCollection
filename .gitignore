@@ -34,3 +34,8 @@ desktop.ini
 
 idea/
 Storage/
+
+# Environment variables
+.env
+.env.local
+.env.*.local

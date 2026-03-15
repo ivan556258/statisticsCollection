@@ -35,23 +35,35 @@ public class TutorTimeSlotQuery
                     {
                         while (await reader.ReadAsync())
                         {
+                            // Check if status_id column exists in result set
+                            int? statusId = null;
+                            try
+                            {
+                                var statusIdOrdinal = reader.GetOrdinal("is_booked");
+                                statusId = reader["is_booked"] != DBNull.Value
+                                    ? Convert.ToInt32(reader["is_booked"])
+                                    : null;
+                            }
+                            catch (IndexOutOfRangeException)
+                            {
+                                // Column doesn't exist, leave as null
+                            }
+
+                            var studentIdOrdinal = reader.GetOrdinal("student_id");
                             var timeSlot = new TutorTimeSlotDTO()
                             {
+                                
                                 Id = Convert.ToInt64(reader["id"]),
                                 TutorId = Convert.ToInt64(reader["tutor_id"]),
                                 Date = Convert.ToDateTime(reader["date"]),
                                 StartTime = (TimeSpan)reader["start_time"],
                                 EndTime = (TimeSpan)reader["end_time"],
-                                StudentID = reader["student_id"] != DBNull.Value
-                                    ? Convert.ToInt64(reader["student_id"])
-                                    : null,
-                                StudentName = reader["student_name"] != DBNull.Value
-                                    ? Convert.ToString(reader["student_name"])
-                                    : null,
-                                StudentEmail = reader["student_name"] != DBNull.Value
-                                    ? Convert.ToString(reader["student_email"])
-                                    : null,
-                                IsConfirm = Convert.ToBoolean(reader["is_confirm"])
+                                StudentID = reader.IsDBNull(studentIdOrdinal)
+                                    ? -1
+                                    : reader.GetInt64(studentIdOrdinal),
+                                StudentName = Convert.ToString(reader["student_name"]) ?? "",
+                                StudentEmail = Convert.ToString(reader["student_email"]) ?? "",
+                                StatusId = statusId
                             };
                             timeSlots.Add(timeSlot);
                         }

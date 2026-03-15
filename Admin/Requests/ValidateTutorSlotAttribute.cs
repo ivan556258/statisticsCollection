@@ -88,6 +88,18 @@ public class ValidateTutorSlotAttribute : ActionFilterAttribute
         using var reader = await command.ExecuteReaderAsync();
         while (await reader.ReadAsync())
         {
+            // Check if status_id column exists in result set
+            int? statusId = null;
+            try
+            {
+                var statusIdOrdinal = reader.GetOrdinal("status_id");
+                statusId = reader["status_id"] != DBNull.Value ? Convert.ToInt32(reader["status_id"]) : null;
+            }
+            catch (IndexOutOfRangeException)
+            {
+                // Column doesn't exist, leave as null
+            }
+
             result.Add(new TutorTimeSlotDTO
             {
                 Id = Convert.ToInt64(reader["id"]),
@@ -97,8 +109,8 @@ public class ValidateTutorSlotAttribute : ActionFilterAttribute
                 EndTime = (TimeSpan)reader["end_time"],
                 StudentID = reader["student_id"] != DBNull.Value ? Convert.ToInt64(reader["student_id"]) : null,
                 StudentName = reader["student_name"] != DBNull.Value ? Convert.ToString(reader["student_name"]) : null,
-                StudentEmail = reader["student_name"] != DBNull.Value ? Convert.ToString(reader["student_email"]) : null,
-                IsConfirm = Convert.ToBoolean(reader["is_confirm"])
+                StudentEmail = reader["student_email"] != DBNull.Value ? Convert.ToString(reader["student_email"]) : null,
+                StatusId = statusId
             });
         }
 

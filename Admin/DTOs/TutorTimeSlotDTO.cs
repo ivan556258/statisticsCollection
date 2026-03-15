@@ -28,6 +28,6 @@ public class TutorTimeSlotDTO
     [JsonPropertyName("student_email")] 
     public string? StudentEmail { get; init; }
     
-    [JsonPropertyName("is_confirm")] 
-    public bool? IsConfirm { get; init; }
+    [JsonPropertyName("status_id")] 
+    public int? StatusId { get; init; }
 } 

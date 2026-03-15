@@ -1,4 +1,6 @@
 using Microsoft.Extensions.FileProviders;
+using WebApplication1.Admin.Repository.Query;
+using WebApplication1.Admin.Services;
 using WebApplication1.Statistics.RepositoryHttp.Interfaces;
 using WebApplication1.Statistics.RepositoryHttp.Queries;
 using WebApplication1.Statistics.Services;
@@ -28,6 +30,9 @@ builder.Services.AddScoped<PosthogInterface, PosthogQuery>();
 builder.Services.AddScoped<ValidateTutorSlotAttribute>(provider =>
     new ValidateTutorSlotAttribute(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
+
+builder.Services.AddScoped<TimezoneQuery>();
+builder.Services.AddScoped<TimezoneService>();
 
 
 var app = builder.Build();

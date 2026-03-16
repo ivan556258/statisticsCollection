@@ -12,13 +12,13 @@ public class MysqlManager
     private static MysqlManager _instance;
     private static readonly object _lock = new object();
     private readonly MySqlConnection connection;
-    // private static readonly string ConnectionString = "server=lh_mysql;port=3306;user=root;password=4321;database=mojo_staging";
+    // private static readonly string ConnectionString = "server=lh_mysql;port=3306;user=root;password=4321;database=lingua_hub";
     private static readonly string ConnectionString = $"server={Environment.GetEnvironmentVariable("DB_SERVER")};port={Environment.GetEnvironmentVariable("DB_PORT")};user={Environment.GetEnvironmentVariable("DB_USER")};password={Environment.GetEnvironmentVariable("DB_PASSWORD")};database={Environment.GetEnvironmentVariable("DB_DATABASE")}";
 
     private MysqlManager()
     {
         // Инициализируем соединение при создании экземпляра
-        // connection = new MySqlConnection("server=lh_mysql;port=3306;user=root;password=4321;database=mojo_staging");
+        // connection = new MySqlConnection("server=lh_mysql;port=3306;user=root;password=4321;database=lingua_hub");
         connection = new MySqlConnection($"server={Environment.GetEnvironmentVariable("DB_SERVER")};port={Environment.GetEnvironmentVariable("DB_PORT")};user={Environment.GetEnvironmentVariable("DB_USER")};password={Environment.GetEnvironmentVariable("DB_PASSWORD")};database={Environment.GetEnvironmentVariable("DB_DATABASE")}");
         connection.Open();
     }

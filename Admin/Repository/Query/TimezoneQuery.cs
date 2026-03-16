@@ -27,7 +27,7 @@ public class TimezoneQuery
             }
 
             await using var command = new MySqlCommand(
-                "SELECT 1 FROM mojo_staging.`user` WHERE id = @p_tutor_id LIMIT 1",
+                "SELECT 1 FROM lingua_hub.`user` WHERE id = @p_tutor_id LIMIT 1",
                 connection)
             {
                 CommandType = CommandType.Text
@@ -69,9 +69,9 @@ public class TimezoneQuery
             }
 
             // В MySQL из кода вызываем процедуру без фигурных скобок:
-            // CALL mojo_staging.`admin.search_timezones`('Asia', 10);
+            // CALL lingua_hub.`admin.search_timezones`('Asia', 10);
             await using var command = new MySqlCommand(
-                "CALL mojo_staging.`admin.search_timezones`(@p_query, @p_limit)",
+                "CALL lingua_hub.`admin.search_timezones`(@p_query, @p_limit)",
                 connection)
             {
                 CommandType = CommandType.Text
@@ -129,7 +129,7 @@ public class TimezoneQuery
             }
 
             await using var command = new MySqlCommand(
-                "CALL mojo_staging.`admin.tutors_change_timezone`(@p_tutor_id, @p_new_timezone)",
+                "CALL lingua_hub.`admin.tutors_change_timezone`(@p_tutor_id, @p_new_timezone)",
                 connection)
             {
                 CommandType = CommandType.Text

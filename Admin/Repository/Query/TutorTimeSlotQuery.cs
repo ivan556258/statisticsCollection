@@ -134,7 +134,7 @@ public class TutorTimeSlotQuery
 
                 using (var command =
                        new MySqlCommand(
-                           "{ CALL mojo_staging.`admin.tutors_change_time`(@p_tutor_id, @p_date, @p_start, @p_end) }",
+                           "{ CALL lingua_hub.`admin.tutors_change_time`(@p_tutor_id, @p_date, @p_start, @p_end) }",
                            connection))
                 {
                     command.CommandType = System.Data.CommandType.Text;

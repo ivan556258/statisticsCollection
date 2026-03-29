@@ -71,7 +71,7 @@ public class TimezoneQuery
             // В MySQL из кода вызываем процедуру без фигурных скобок:
             // CALL lingua_hub.`admin.search_timezones`('Asia', 10);
             await using var command = new MySqlCommand(
-                "CALL `admin`.`search_timezones`(@p_query, @p_limit)",
+                "CALL lingua_hub.`admin`.`search_timezones`(@p_query, @p_limit)",
                 connection)
             {
                 CommandType = CommandType.Text
